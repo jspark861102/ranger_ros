@@ -7,7 +7,7 @@
     <arg name="base_frame" default="base_link" />
     <arg name="update_rate" default="50" />
     <arg name="odom_topic_name" default="odom" />
-    <arg name="publish_odom_tf" default="false" />
+    <arg name="publish_odom_tf" default="true" />
 
     <include file="$(find ranger_base)/launch/include/ranger_robot_base.launch">
         <arg name="port_name" value="$(arg port_name)"/>
@@ -17,5 +17,5 @@
         <arg name="update_rate" value="$(arg update_rate)" />
         <arg name="odom_topic_name" value="$(arg odom_topic_name)" />
         <arg name="publish_odom_tf" value="$(arg publish_odom_tf)" />
-    </include>
+    </include>       
 </launch>

@@ -152,7 +152,7 @@ void RangerROSMessenger::SetupSubscription() {
 
   // subscriber
   motion_cmd_sub_ = nh_->subscribe<geometry_msgs::Twist>(
-      "/cmd_vel", 5, &RangerROSMessenger::TwistCmdCallback, this);
+      "/ranger/cmd_vel", 5, &RangerROSMessenger::TwistCmdCallback, this);
   light_cmd_subscriber_ = nh_->subscribe<ranger_msgs::RangerLightCmd>(
       "/ranger_light_control", 5, &RangerROSMessenger::LightCmdCallback, this);
 
@@ -432,15 +432,6 @@ void RangerROSMessenger::TwistCmdCallback(
     }
     case MotionState::MOTION_MODE_PARALLEL: {
       steer_cmd = atan(msg->linear.y / msg->linear.x);
-      if (std::signbit(msg->linear.x)&&msg->linear.x == 0.0)
-      {
-        steer_cmd = -steer_cmd;
-      }
-      else
-      {
-        steer_cmd = steer_cmd;
-      }
-      
       if (steer_cmd > robot_params_.max_steer_angle_parallel) {
         steer_cmd = robot_params_.max_steer_angle_parallel;
       }
